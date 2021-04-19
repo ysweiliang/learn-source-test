@@ -14,6 +14,7 @@ public class SortArithmetic {
         String[] a = new String[]{"9", "3", "5", "7", "6", "4", "2", "1"};
 //        SortArithmetic.selection(a);
 //        SortArithmetic.insertion(a);
+        SortArithmetic.quickSort(new int[]{9, 3, 5, 10, 15}, 0, 4);
         SortArithmetic.merge(a, new String[a.length], 0, a.length - 1);
         System.out.println(Arrays.toString(a));
     }
@@ -100,12 +101,44 @@ public class SortArithmetic {
     /**
      * 快速排序
      */
-    public static void quick(String[] a) {
-        int len = a.length;
-        int low = 0;
-        int high = len - 1;
-        int mid = (low + high) / 2;
+    public static void quickSort(int[] arr, int start, int end) {
+        // 递归终止条件
+        if (start >= end) {
+            return;
+        }
+        // 第一步，找出分区后枢轴的下标，比如[2,1,3],枢轴为2，分区后枢轴的下标为1
+        int pivotIndex = partition(arr, start, end);
+        // 第二步，对左子数组排序
+        quickSort(arr, start, pivotIndex - 1);
+        // 第三步，对右子数组排序
+        quickSort(arr, pivotIndex + 1, end);
+    }
 
+    private static int partition(int[] arr, int start, int end) {
+        // 确定枢轴元素
+        int pivot = arr[start];
+        // 定义两个指针（引用），一个指向数组左端，一个指向数组右端
+        int left = start;
+        int right = end;
+        while (left < right) {
+            // 从右往左扫描，寻找比枢轴元素小的，并填入坑中
+            while (left < right && arr[right] >= pivot) {
+                right--;
+            }
+            if (left < right) {
+                arr[left++] = arr[right];
+            }
+            // 从左往右扫描，寻找比枢轴元素大的，并填入新坑中
+            while (left < right && arr[left] < pivot) {
+                left++;
+            }
+            if (left < right) {
+                arr[right--] = arr[left];
+            }
+        }
+        // 扫描完成后,将枢轴元素填入新坑中
+        arr[left] = pivot;
+        return left;
     }
 
 
