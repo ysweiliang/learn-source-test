@@ -13,6 +13,8 @@ import org.junit.Assert;
  * @create 2021/10/27 15:18
  */
 public class NettySerializeTest {
+    //魔数 版本号 序列化算法 指令 数据长度 数据
+    //4     1     1       1    4    N字节
     public static void main(String[] args) {
         Serializer serializer = new JSONSerializer();
         LoginRequestPacket loginRequestPacket = new LoginRequestPacket();

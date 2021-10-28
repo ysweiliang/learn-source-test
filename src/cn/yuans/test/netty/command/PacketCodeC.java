@@ -8,6 +8,10 @@ import io.netty.buffer.ByteBufAllocator;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 魔数 版本号 序列化算法 指令 数据长度 数据
+ * 4     1     1       1    4    N字节
+ */
 public class PacketCodeC {
 
     private static final int MAGIC_NUMBER = 0x12345678;
